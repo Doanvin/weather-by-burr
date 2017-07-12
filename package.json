@@ -2,7 +2,7 @@
   "name": "weather-by-burr",
   "version": "1.0.0",
   "description": "Web application for weather with witty comments by comedian Bill Burr.",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Doanvin/weather-by-burr.git"
   },
   "author": "@Doanvin",
-  "license": "GNUv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/Doanvin/weather-by-burr/issues"
   },
@@ -32,6 +32,8 @@
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
-    "foundation-sites": "^6.4.1"
+    "foundation-sites": "^6.4.1",
+    "motion-ui": "^1.2.3",
+    "normalize-scss": "^7.0.0"
   }
 }

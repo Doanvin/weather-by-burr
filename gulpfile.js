@@ -26,11 +26,17 @@ gulp.task('js', function(){
 });
 
 // Sass Task
+var sassPaths = [
+  'node_modules/normalize.scss/sass',
+  'node_modules/foundation-sites/scss',
+  'node_modules/motion-ui/src'
+];
+
 gulp.task('sass', function () {
   return gulp.src('src/assets/scss/*.scss')
     .pipe(plumber())
     .pipe(autoprefixer('last 2 versions'))
-    .pipe(sass())
+    .pipe(sass({includePaths: sassPaths}))
     .pipe(gulp.dest('build/assets/css'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(cleanCSS())
@@ -56,7 +62,7 @@ gulp.task('img', function() {
 
 // Browser-Sync Task
 gulp.task('browser-sync', function() {
-    browserSync({
+    browserSync.init({
         server: {
             baseDir: "./build/"
         }
