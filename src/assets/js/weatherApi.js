@@ -1,5 +1,5 @@
 function getWeatherItem() {
-	var queryText = document.getElementById("weatherQuery").value;
+	var queryText = document.getElementsByClassName("weather__query-item--start")[0].value;
   console.log(queryText);
   queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
   console.log(queryText);
@@ -20,15 +20,34 @@ function getWeatherItem() {
 function parseWeatherItem (o) {
   // Parses returned response, o, and extracts
   // the title, links, and text of each news story.
-  var items = o.query.results.item;
+  var results = o.query.results.channel;
+	console.log(results);
+	var city = results.location.city;
+	console.log(city);
+	var state = results.location.region;
+	var country = results.location.country;
+	var current = results.item.condition;
+	console.log(current);
+	var forecasts = results.item.forecast;
+	console.log(forecasts);
   var output = '';
-  var no_items=items.length;
-  for(var i=0;i<no_items;i++){
-    var title = items[i].title;
-    var link = items[i].link;
-    var desc = items[i].description;
-    output += "<div class="+ '"row"' + "><h3><a href='" + link + "'>"+title+"</a></h3>" + desc + "</div><hr/>";
-  }
-  // Place news stories in div tag
-  document.getElementById('weatherResults').innerHTML = output;
+	createWeatherCurrent(city, state, country, current);
+	createWeatherForecast(forecasts);
+}
+
+function createWeatherCurrent (city, state, country, currentConditions) {
+	// Takes parsed weather info and creates a div to be placed in the
+	// #weatherCurrent div. All variables passed in should be strings.
+	return console.log(document.getElementsByClassName('weather__current')[0].innerHTML)
+}
+
+function createWeatherForecast (forecasts) {
+	var noForecasts = forecasts.length;
+  for (var i = 0; i < noForecasts; i++) {
+    var day = forecasts[i].day;
+    var high = forecasts[i].high;
+    var low = forecasts[i].low;
+		var text = forecasts[i].text;
+		output += "<div class="+ '"row"' + "><h3><a href='" + link + "'>"+title+"</a></h3>" + desc + "</div><hr/>";
+	}
 }

@@ -1,13 +1,41 @@
 .weather {
   height: 70vh;
-  margin: 30rem auto 0;
+  margin: 7rem auto 0;
+
+  .weather__padding {
+    background: rgb(84, 235, 16);
+    border: 1px solid black;
+    padding-top: 25rem;
+  }
+
+  .weather__current {
+    background: rgb(104, 182, 224);
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .weather__query {
-    margin: 10px auto;
-    width: 100%;
+    background: rgb(222, 236, 65);
+    border: 1px solid black;
+    margin: 15px;
   }
 
   .weather__query-item {
-    // margin: 0 5px;
+    // max-width: 800px;
+
+    .weather__query-item--start {
+      background: rgb(4, 22, 45);
+      margin-right: 10px;
+    }
+
+    .weather__query-item--end {
+      background: rgb(57, 228, 179);
+      margin-left: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+
   }
 }

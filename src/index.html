@@ -53,21 +53,28 @@
 
     <!-- Begin the weather api section -->
     <section class="weather container">
-      <div class="row form-inline">
-        <div class="form-group col-12 weather__query">
-          <div class="col-md-2 col-xs-hide"></div>
-            <input type="text" class="weather__query-item input-lg col-md-6 col-xs-9" id="weatherQuery" name="weatherQuery" value="" placeholder="Where Are Yuh?">
-            <button type="button" class="weather__query-item btn btn-lg btn-success col-md-2 col-xs-3" onclick="getWeatherItem();">Search</button>
-          <div class="col-md-2 col-xs-hide"></div>
+      <!-- Padding that is hidden when #weatherResults is displayed -->
+      <div class="weather__padding">&nbsp;</div>
+      <!-- Div tag for displaying current weather conditions after a query -->
+      <div class="row weather__current">
+        <div class="col-xs-12 text-center">
+          <h3>Current Weather Conditions</h3>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-10 col-xs-9">
+          <input type="text" class="input-lg form-control weather__query-item--start" name="weatherQuery" value="" placeholder="Where Are Yuh?">
+        </div>
+        <div class="col-md-2 col-xs-3">
+          <button type="button" class="btn btn-lg btn-success weather__query-item--end" onclick="getWeatherItem();">Search</button>
+        </div>
+      </div>
+      <!-- Div tag for weather forecast results -->
+      <div class="weather__forecast"></div>
     </section>
 
 
-    <section class="container">
-      <!-- Div tag for stories results -->
-      <div id="weatherResults"></div>
-    </section>
+
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
