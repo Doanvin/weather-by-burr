@@ -12,18 +12,32 @@ var reload        = browserSync.reload;
 var rename        = require('gulp-rename');
 var sass          = require('gulp-sass');
 var uglify        = require('gulp-uglify');
-var sourcemaps    = require("gulp-sourcemaps");
-var babel         = require("gulp-babel");
+var sourcemaps    = require('gulp-sourcemaps');
+var babel         = require('gulp-babel');
 
 // JS Task
-gulp.task('js', function () {
-  return gulp.src("src/assets/js/*.js")
+gulp.task('js-compile', function () {
+  return gulp.src('src/assets/js/**/*.js')
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat("all.js"))
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("dist"));
+    .pipe(concat('bundle.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('build/assets/js'))
 });
+
+gulp.task('js-minify', ['js-compile'], function () {
+  return gulp.src('build/assets/js/bundle.js')
+    .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('build/assets/js'))
+    .pipe(reload({stream:true}));
+});
+
+gulp.task('js', ['js-compile', 'js-minify']);
 
 
 // gulp.task('js', function(){
@@ -76,7 +90,7 @@ gulp.task('img', function() {
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./build/"
+            baseDir: './build/'
         }
     });
 });
