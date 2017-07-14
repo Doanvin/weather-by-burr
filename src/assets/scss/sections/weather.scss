@@ -1,41 +1,85 @@
+// Functional Variables
+$phone-heading-size: 3rem;
+$tablet-heading-size: 4rem;
+$desktop-heading-size: 5rem;
+$input-border-color: rgb(214, 222, 55);
+$panel-color-primary: rgb(104, 182, 224);
+
+// Descriptive Variables
+$black: #000;
+
+@mixin border {
+  border: 1px solid $black;
+}
+
+@mixin block-margin {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .weather {
-  height: 70vh;
-  margin: 7rem auto 0;
+  margin-top: 7rem;
 
-  .weather__padding {
-    background: rgb(84, 235, 16);
-    border: 1px solid black;
-    padding-top: 25rem;
+  &__search {
+    border: 1px solid;
+
   }
 
-  .weather__current {
-    background: rgb(104, 182, 224);
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: auto;
+  &__current {
+    @include border;
+    @include block-margin;
+    background: $panel-color-primary;
+    // padding-bottom: 10px;
   }
 
-  .weather__query {
-    background: rgb(222, 236, 65);
-    border: 1px solid black;
+  &__condition {
+    font-size: $phone-heading-size;
+  }
+
+  &__query {
+    @include border;
     margin: 15px;
   }
 
-  .weather__query-item {
-    // max-width: 800px;
+  &__forcast {
+    @include border;
+    @include block-margin;
+  }
+}
 
-    .weather__query-item--start {
-      background: rgb(4, 22, 45);
-      margin-right: 10px;
-    }
+.padding {
+  @include border;
+  padding-top: 5rem;
+}
 
-    .weather__query-item--end {
-      background: rgb(57, 228, 179);
-      margin-left: 10px;
-    }
+.search {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  width: 100%;
+
+  &--center {
+    @include border;
+    @include block-margin;
+    float: none;
   }
 
-  @media only screen and (max-width: 768px) {
+  &__input {
+    border: 1px solid $input-border-color;
+  }
+}
 
+@media (max-width: 767px) {
+  .search__button {
+    float: none;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 16px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .search {
+    padding-bottom: 70px;
   }
 }
