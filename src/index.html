@@ -7,7 +7,7 @@
   <title>Weather By Burr</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/main.min.css">
-  <link rel="stylesheet" href="assets/css/defer.min.css">
+  <link defer rel="stylesheet" href="assets/css/defer.min.css">
 </head>
 <body>
   <div class="navbar-wrapper">
@@ -49,35 +49,33 @@
       </div>
     </div>
 
-    <!-- <hr class="featurette-divider"> -->
+
 
     <!-- Begin the weather api section -->
-    <section class="weather-wrapper container-fluid">
-      <div class="weather container">
-        <!-- Padding that is hidden when #weatherResults is displayed -->
-        <div class="padding">&nbsp;</div>
-        <!-- Div tag for displaying current weather conditions after a query -->
-        <div class="row weather__current">
-          <div class="col-xs-12 text-center">
-            <h2 class="weather__location">Reno, NV</h2>
-            <p class="weather__condition"></p>
-          </div>
+    <section class="weather container">
+      <!-- Padding that is hidden when #weatherResults is displayed -->
+      <div class="weather__padding">&nbsp;</div>
+      <!-- Div tag for displaying current weather conditions after a query -->
+      <div class="row weather__current">
+        <div class="col-xs-12 text-center">
+          <h2 class="weather__location">Reno, NV</h2>
+          <p class="weather__condition"></p>
         </div>
-        <!-- row class not needed because of the form-control class -->
-        <div class="search search--center">
-          <div class="col-sm-8 col-sm-offset-1 col-md-6 col-md-offset-2">
-            <input type="text" class="input-lg form-control search__input" name="weatherQuery" value="" placeholder="Where Are Yuh?">
-          </div>
-          <button type="button" class="col-sm-2 btn btn-lg btn-success search__button" onclick="getWeatherItem();">Search</button>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-xs-9">
+          <input type="text" class="input-lg form-control weather__query-item--start" name="weatherQuery" value="" placeholder="Where Are Yuh?">
         </div>
-
-        <!-- Div tag for weather forecast results -->
-        <div class="row weather__forecast">
-          <div class="col-xs-12 text-center">
-            <h2 class="weather__forecast-title hidden">Here's the Forecast You Cunt</h2>
-          </div>
-          <div class="weather__forecast-boxes"></div>
+        <div class="col-md-2 col-xs-3">
+          <button type="button" class="btn btn-lg btn-success weather__query-item--end" onclick="getWeatherItem();">Search</button>
         </div>
+      </div>
+      <!-- Div tag for weather forecast results -->
+      <div class="row weather__forecast">
+        <div class="col-xs-12 text-center">
+          <h2 class="weather__forecast-title hidden">Here's the Forecast You Cunt</h2>
+        </div>
+        <div class="weather__forecast-boxes"></div>
       </div>
     </section>
 

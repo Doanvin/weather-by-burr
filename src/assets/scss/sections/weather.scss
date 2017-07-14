@@ -1,99 +1,41 @@
-// Functional Variables
-$phone-heading-size: 3rem;
-$tablet-heading-size: 4rem;
-$desktop-heading-size: 5rem;
-
-// Descriptive Variables
-$black: #000;
-
-@mixin border {
-  border: 1px solid $black;
-}
-
-@mixin block-margin {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .weather {
-  margin-top: 7rem;
+  height: 70vh;
+  margin: 7rem auto 0;
 
-  &__search {
-    border: 1px solid;
-
+  .weather__padding {
+    background: rgb(84, 235, 16);
+    border: 1px solid black;
+    padding-top: 25rem;
   }
 
-  &__current {
-    @include border;
-    @include block-margin;
+  .weather__current {
     background: rgb(104, 182, 224);
-    // padding-bottom: 10px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  &__condition {
-    font-size: $phone-heading-size;
-  }
-
-  &__query {
-    @include border;
+  .weather__query {
     background: rgb(222, 236, 65);
+    border: 1px solid black;
     margin: 15px;
   }
 
-  &__query-item {
+  .weather__query-item {
     // max-width: 800px;
 
-    &--start {
+    .weather__query-item--start {
       background: rgb(4, 22, 45);
       margin-right: 10px;
     }
 
-    &--end {
+    .weather__query-item--end {
       background: rgb(57, 228, 179);
       margin-left: 10px;
     }
   }
 
-  &__forcast {
-    @include border;
-    @include block-margin;
-  }
-}
+  @media only screen and (max-width: 768px) {
 
-.padding {
-  @include border;
-  background: rgb(84, 235, 16);
-  padding-top: 5rem;
-}
-
-.search {
-  padding-bottom: 20px;
-  padding-top: 20px;
-  width: 100%;
-
-  &--center {
-    @include border;
-    @include block-margin;
-    float: none;
-  }
-
-  &__input {
-    border: 1px solid yellow;
-  }
-}
-
-@media (max-width: 767px) {
-  .search__button {
-    float: none;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top: 16px;
-    width: 50%;
-  }
-}
-
-@media (min-width: 768px) {
-  .search {
-    padding-bottom: 70px;
   }
 }
