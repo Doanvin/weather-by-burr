@@ -1,3 +1,4 @@
+/* exported getWeatherItem */
 function getWeatherItem() {
     let queryText = document.getElementsByClassName('weather__query-item--start')[0].value;
     queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
@@ -6,7 +7,6 @@ function getWeatherItem() {
   // Format the url
     let url = startUrl + queryText + endUrl;
     url = url.replace(/"/, '');
-    console.log(url);
   // Create the script element that makes the api call and uses
   // parseWeatherItem() as a callback.
     const script = document.createElement('script');
@@ -15,20 +15,16 @@ function getWeatherItem() {
     document.body.appendChild(script);
 }
 
+/* exported parseWeatherItem */
 function parseWeatherItem (o) {
   // Parses returned response, o, and extracts
   // the title, links, and text of each news story.
     const results = o.query.results.channel;
-    console.log(results);
     const city = results.location.city;
-    console.log(city);
     const state = results.location.region;
     const country = results.location.country;
     const current = results.item.condition;
-    console.log(current);
     const forecasts = results.item.forecast;
-    console.log(forecasts);
-    let output = '';
     createWeatherCurrent(city, state, country, current);
     createWeatherForecast(forecasts);
 }
@@ -36,16 +32,29 @@ function parseWeatherItem (o) {
 function createWeatherCurrent (city, state, country, currentConditions) {
   // Takes parsed weather info and creates a div to be placed in the
   // #weatherCurrent div. All variables passed in should be strings.
-    return console.log(document.getElementsByClassName('weather__current')[0].innerHTML);
+    let location = document.getElementsByClassName('weather__location')[0];
+    location.innerHTML = city + ', ' + state + '<br/>' + country;
+
+    let condition = document.getElementsByClassName('weather__condition')[0];
+    condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 and Fucking ' + currentConditions.text;
 }
 
 function createWeatherForecast (forecasts) {
     const noForecasts = forecasts.length;
+    let forecastHtml = '';
     for (let i = 0; i < noForecasts; i++) {
         const day = forecasts[i].day;
         const high = forecasts[i].high;
         const low = forecasts[i].low;
         const text = forecasts[i].text;
-        output += '<div class='+ '"row"' + '><h3><a href=\'' + link + '\'>'+title+'</a></h3>' + desc + '</div><hr/>';
+        forecastHtml += '<div class="weather__forecast-item col-md-2"><h3>' + day + '</h3><p>' + high + '</p><p>' + low + '</p><p>' + text + '</p></div>';
     }
+    // Remove hidden class to display weather__forecast-title div
+    const forecastTitle = document.getElementsByClassName('weather__forecast-title')[0];
+    if ( forecastTitle.classList.contains('hidden') ) {
+        forecastTitle.classList.remove('hidden');
+    }
+
+    let forecastDiv = document.getElementsByClassName('weather__forecast-boxes')[0];
+    forecastDiv.innerHTML = forecastHtml;
 }
