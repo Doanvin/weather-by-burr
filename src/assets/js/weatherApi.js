@@ -7,23 +7,46 @@
     })
 ());
 
-/* exported getWeatherItem */
-function getWeatherItem() {
+function httpGetAsync(theUrl, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200)
+            callback(xhr.responseText);
+    };
+    xhr.open('GET', theUrl, true); // true for asynchronous
+    xhr.send(null);
+}
+
+function createWeatherGetUrl() {
     let queryText = document.getElementsByClassName('search__input')[0].value;
+    // queryText is value of search input box; Reno, Nv if undefined
+    if (queryText == undefined){queryText = 'Reno, Nv';}
     queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
+    // Format url
     const startUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22';
     const endUrl = '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=parseWeatherItem';
-    // Format the API call url
     let url = startUrl + queryText + endUrl;
     url = url.replace(/"/, '');
+    return url;
+}
+
+
+/* exported getWeatherItem */
+function getWeatherItem() {
+    const url = createWeatherGetUrl();
+    httpGetAsync(url, parseWeatherItem());
     // Create the script element that makes the api call and uses
     // parseWeatherItem() as a callback.
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
-    script.setAttribute('async','');
-    document.body.appendChild(script);
+
 }
+
+// function createAsyncScript(srcUrl) {
+//     const script = document.createElement('script');
+//     script.type = 'text/javascript';
+//     script.src = srcUrl;
+//     script.setAttribute('async','');
+//     document.body.appendChild(script);
+// }
 
 /* exported parseWeatherItem */
 function parseWeatherItem (o) {
