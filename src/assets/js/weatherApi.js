@@ -39,14 +39,6 @@ function getWeatherItem() {
 
 }
 
-// function createAsyncScript(srcUrl) {
-//     const script = document.createElement('script');
-//     script.type = 'text/javascript';
-//     script.src = srcUrl;
-//     script.setAttribute('async','');
-//     document.body.appendChild(script);
-// }
-
 /* exported parseWeatherItem */
 function parseWeatherItem (o) {
     // Parses returned response, o, and extracts
