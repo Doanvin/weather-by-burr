@@ -12,7 +12,6 @@ function httpGetAsync(theUrl, callback) {
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200)
             callback(xhr.responseText);
-        console.log(xhr.responseText);
     };
     xhr.open('GET', theUrl, true); // true for asynchronous
     xhr.send(null);
@@ -67,17 +66,16 @@ function createWeatherCurrent (city, state, country, currentConditions) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weatherCurrent div. All variables passed in should be strings.
     let location = document.getElementsByClassName('weather__location')[0];
-    location.innerHTML = city + ', ' + state + country;
+    location.innerHTML = city + ', ' + state + ' ' + country;
 
     let condition = document.getElementsByClassName('weather__condition')[0];
-    condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 and Fucking ' + currentConditions.text;
+    condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And Fucking ' + currentConditions.text;
 }
 
 function createWeatherForecast (forecasts) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weather__forecast div. forecasts is an array of objects.
     const numForecasts = forecasts.length;
-    let width = window.innerWidth;
     let forecastHtml = '';
     for (let i = 0; i < numForecasts; i++) {
         const day = forecasts[i].day;
@@ -87,11 +85,12 @@ function createWeatherForecast (forecasts) {
         const imgSrc = setImgSrc(forecasts[i].code);
         let forecastClass = '';
         let forecastClearfix = '';
-        if (width >= 992 && (i == 0 || i == 5)) {
-            forecastClass = 'col-md-offset-1 col-sm-offset-0 ';
-        }
-        else if (width >=992 && i == 4) {
-            forecastClearfix = '<div class="clearfix visible-md-block"></div>';
+        if ((i == 0) || (i == 5)) {
+            forecastClass = 'col-md-offset-1 ';
+        } else if ((i == 4)) {
+            forecastClearfix = '<div class="clearfix visible-md-block visible-lg-block"></div>';
+        } else if ((i == 8)) {
+            forecastClass = 'col-sm-offset-3 col-md-offset-0 col-lg-offset-0';
         }
         forecastHtml += '<div class="weather__forecast-item ' + forecastClass + 'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day + '</h3></div><div class="col-xs-6"><p>' + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/' + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
     }
@@ -122,7 +121,7 @@ function setImgSrc(code) {
             weatherCodes[6],
             weatherCodes[6],
             weatherCodes[6],
-            weatherCodes[6],
+            weatherCodes[8],
             weatherCodes[6],
             weatherCodes[11],
             weatherCodes[11],
