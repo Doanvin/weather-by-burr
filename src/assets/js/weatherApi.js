@@ -23,7 +23,7 @@ function createWeatherGetUrl() {
     if (queryText == undefined){queryText = 'Reno, Nv';}
     queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
     // Format url
-    const startUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22';
+    const startUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20location%2C%20item%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22';
     const endUrl = '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
     let url = startUrl + queryText + endUrl;
     url = url.replace(/"/, '');
@@ -66,7 +66,7 @@ function createWeatherCurrent (city, state, country, currentConditions) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weatherCurrent div. All variables passed in should be strings.
     let location = document.getElementsByClassName('weather__location')[0];
-    location.innerHTML = city + ', ' + state + ' ' + country;
+    location.innerHTML = city + ', ' + state + ' ~ ' + country;
 
     let condition = document.getElementsByClassName('weather__condition')[0];
     condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And Fucking ' + currentConditions.text;
@@ -90,7 +90,7 @@ function createWeatherForecast (forecasts) {
         } else if ((i == 4)) {
             forecastClearfix = '<div class="clearfix visible-md-block visible-lg-block"></div>';
         } else if ((i == 8)) {
-            forecastClass = 'col-sm-offset-3 col-md-offset-0 col-lg-offset-0';
+            forecastClass = 'col-sm-offset-3 col-md-offset-0 col-lg-offset-0 ';
         }
         forecastHtml += '<div class="weather__forecast-item ' + forecastClass + 'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day + '</h3></div><div class="col-xs-6"><p>' + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/' + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
     }
@@ -110,52 +110,52 @@ function setImgSrc(code) {
     const weatherCodes = ['Sunny', 'Cloudy', 'MostlyCloudy', 'CloudyNight', 'Thunderstorms', 'ThunderstormsNight', 'Drizzle', 'DrizzleNight', 'SlightDrizzle', 'Haze', 'Moon', 'Snow'];
     const yahooWeather =
         [
+            weatherCodes[5],// 0
             weatherCodes[5],
             weatherCodes[5],
             weatherCodes[5],
             weatherCodes[5],
-            weatherCodes[5],
-            weatherCodes[11],
+            weatherCodes[11],// 5
             weatherCodes[6],
             weatherCodes[11],
             weatherCodes[6],
             weatherCodes[6],
-            weatherCodes[6],
+            weatherCodes[6],// 10
             weatherCodes[8],
             weatherCodes[6],
             weatherCodes[11],
             weatherCodes[11],
-            weatherCodes[11],
+            weatherCodes[11],// 15
             weatherCodes[11],
             weatherCodes[7],
             weatherCodes[7],
             weatherCodes[0],
+            weatherCodes[9],// 20
             weatherCodes[9],
             weatherCodes[9],
             weatherCodes[9],
             weatherCodes[9],
-            weatherCodes[9],
-            weatherCodes[1],
+            weatherCodes[1],// 25
             weatherCodes[1],
             weatherCodes[3],
             weatherCodes[2],
             weatherCodes[3],
-            weatherCodes[2],
+            weatherCodes[2],// 30
             weatherCodes[10],
             weatherCodes[0],
             weatherCodes[10],
             weatherCodes[2],
-            weatherCodes[7],
+            weatherCodes[7],// 35
             weatherCodes[0],
             weatherCodes[4],
             weatherCodes[4],
-            weatherCodes[4],
-            weatherCodes[7],
+            weatherCodes[8],
+            weatherCodes[8],// 40
             weatherCodes[11],
             weatherCodes[11],
             weatherCodes[11],
             weatherCodes[11],
-            weatherCodes[4],
+            weatherCodes[4],// 45
             weatherCodes[11],
             weatherCodes[4]
         ];
