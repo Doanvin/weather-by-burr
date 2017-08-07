@@ -33,15 +33,13 @@ function createWeatherGetUrl() {
 /* exported getWeatherItem */
 function getWeatherItem() {
     const url = createWeatherGetUrl();
+    // Makes async GET request using parseWeatherItem() as a callback.
     httpGetAsync(url, parseWeatherItem);
-    // Create the script element that makes the api call and uses
-    // parseWeatherItem() as a callback.
-
 }
 
 /* exported parseWeatherItem */
 function parseWeatherItem (o) {
-    // Parses returned response, o, and extracts
+    // Parses returned GET response, o, and extracts
     // the title, links, and text of each news story.
     const json = JSON.parse(o);
     const results = json.query.results.channel;
@@ -77,6 +75,10 @@ function createWeatherForecast (forecasts) {
         const imgSrc = setImgSrc(forecasts[i].code);
         let forecastClass = '';
         let forecastClearfix = '';
+        // Fixes Bug #1
+        if ((i % 2 == 1)) {
+            forecastClearfix = '<div class="clearfix visible-xs-block"></div>';
+        }
         if ((i == 0) || (i == 5)) {
             forecastClass = 'col-md-offset-1 ';
         } else if ((i == 4)) {
