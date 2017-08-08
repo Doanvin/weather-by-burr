@@ -76,8 +76,10 @@ function createWeatherForecast (forecasts) {
         let forecastClass = '';
         let forecastClearfix = '';
         // Fixes Bug #1
-        if ((i % 2 == 1)) {
+        if ((i%2==1) && (i!=3) && (i==7)) {
             forecastClearfix = '<div class="clearfix visible-xs-block"></div>';
+        } else if ((i == 3) || (i == 7)) {
+            forecastClearfix = '<div class="clearfix visible-xs-block visible-sm-block"></div>';
         }
         if ((i == 0) || (i == 5)) {
             forecastClass = 'col-md-offset-1 ';
