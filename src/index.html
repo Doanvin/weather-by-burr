@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Project name</a>
+              <a class="navbar-brand" href="#">Weather By Burr</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -55,20 +55,22 @@
     <section class="weather-wrapper container-fluid">
       <div class="weather container">
         <!-- Padding that is hidden when #weatherResults is displayed -->
-        <div class="padding">&nbsp;</div>
-        <!-- Div tag for displaying current weather conditions after a query -->
-        <div class="row weather__current">
-          <div class="col-xs-12 text-center">
-            <h2 class="weather__location">Reno, NV United States</h2>
-            <p class="weather__condition"></p>
-          </div>
-        </div>
+        <div class="weather__padding hidden visible-sm-block visible-md-block visible-lg-block">&nbsp;</div>
+
         <!-- row class not needed because of the form-control class -->
         <div class="search search--center">
           <div class="col-sm-8 col-sm-offset-1 col-md-6 col-md-offset-2">
             <input type="text" class="input-lg form-control search__input" name="weatherQuery" value="" placeholder="Where Are Yuh?">
           </div>
           <button type="button" class="col-sm-2 btn btn-lg btn-success search__button" onclick="getWeatherItem();">Search</button>
+        </div>
+
+        <!-- Div tag for displaying current weather conditions after a query -->
+        <div class="row weather__current">
+          <div class="col-xs-12 text-center">
+            <h2 class="weather__location">Reno, NV United States</h2>
+            <p class="weather__condition"></p>
+          </div>
         </div>
 
         <!-- Div tag for weather forecast results -->
@@ -138,7 +140,6 @@
         <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
-    </div><!-- /.container -->
   <script async type="text/javascript" src="assets/js/bundle.js"></script>
 
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

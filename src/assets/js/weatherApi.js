@@ -56,7 +56,7 @@ function createWeatherCurrent (city, state, country, currentConditions) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weatherCurrent div. All variables passed in should be strings.
     let location = document.getElementsByClassName('weather__location')[0];
-    location.innerHTML = city + ', ' + state + ' ~ ' + country;
+    location.innerHTML = city + ', ' + state;
 
     let condition = document.getElementsByClassName('weather__condition')[0];
     condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And Fucking ' + currentConditions.text;
@@ -76,11 +76,12 @@ function createWeatherForecast (forecasts) {
         let forecastClass = '';
         let forecastClearfix = '';
         // Fixes Bug #1
-        if ((i%2==1) && (i!=3) && (i==7)) {
+        if (i%2==1 && i!==3 && i!==7) {
             forecastClearfix = '<div class="clearfix visible-xs-block"></div>';
-        } else if ((i == 3) || (i == 7)) {
+        } else if (i==3||i==7) {
             forecastClearfix = '<div class="clearfix visible-xs-block visible-sm-block"></div>';
         }
+        // Set responsive classes
         if ((i == 0) || (i == 5)) {
             forecastClass = 'col-md-offset-1 ';
         } else if ((i == 4)) {
@@ -90,12 +91,25 @@ function createWeatherForecast (forecasts) {
         }
         forecastHtml += '<div class="weather__forecast-item ' + forecastClass + 'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day + '</h3></div><div class="col-xs-6"><p>' + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/' + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
     }
-    // Remove hidden class to display weather__forecast-title div
+    // Remove visible class to hide weather__padding
+    const weatherPadding = document.getElementsByClassName('weather__padding')[0].classList;
+    if (weatherPadding.contains('visible-sm-block')) {
+        weatherPadding.remove('visible-sm-block');
+    }
+    if (weatherPadding.contains('visible-md-block')) {
+        weatherPadding.remove('visible-md-block');
+    }
+    if (weatherPadding.contains('visible-lg-block')) {
+        weatherPadding.remove('visible-lg-block');
+    }
+
+    // Add hidden class to hide padding weather__forecast-title div
     const forecastTitle = document.getElementsByClassName('weather__forecast-title')[0];
     if (forecastTitle.classList.contains('hidden')) {
         forecastTitle.classList.remove('hidden');
     }
 
+    // Insert forecastDiv into the html page
     let forecastDiv = document.getElementsByClassName('weather__forecast-boxes')[0];
     forecastDiv.innerHTML = forecastHtml;
 }
