@@ -20,7 +20,7 @@ function httpGetAsync(theUrl, callback) {
 function createWeatherGetUrl() {
     let queryText = document.getElementsByClassName('search__input')[0].value;
     // queryText is value of search input box; Reno, Nv if undefined
-    if (queryText == undefined){queryText = 'Reno, Nv';}
+    if (queryText==undefined || queryText==''){queryText = 'Reno, Nv';}
     queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
     // Format url
     const startUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20location%2C%20item%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22';
@@ -75,7 +75,7 @@ function createWeatherForecast (forecasts) {
         const imgSrc = setImgSrc(forecasts[i].code);
         let forecastClass = '';
         let forecastClearfix = '';
-        // Fixes Bug #1
+        // Fixes Bug #1 | sets clearfixes
         if (i%2==1 && i!==3 && i!==7) {
             forecastClearfix = '<div class="clearfix visible-xs-block"></div>';
         } else if (i==3||i==7) {
@@ -89,7 +89,10 @@ function createWeatherForecast (forecasts) {
         } else if ((i == 8)) {
             forecastClass = 'col-sm-offset-3 col-md-offset-0 col-lg-offset-0 ';
         }
-        forecastHtml += '<div class="weather__forecast-item ' + forecastClass + 'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day + '</h3></div><div class="col-xs-6"><p>' + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/' + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
+        forecastHtml += '<div class="weather__forecast-item ' + forecastClass +
+        'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day + '</h3></div><div class="col-xs-6"><p>'
+        + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/'
+        + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
     }
     // Remove visible class to hide weather__padding
     const weatherPadding = document.getElementsByClassName('weather__padding')[0].classList;
