@@ -43,11 +43,6 @@ $black: #000;
   }
 }
 
-.weather__padding {
-  @include border;
-  padding-top: 10rem;
-}
-
 .search {
   padding-bottom: 20px;
   padding-top: 20px;

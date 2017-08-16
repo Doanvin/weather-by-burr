@@ -94,17 +94,6 @@ function createWeatherForecast (forecasts) {
         + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/'
         + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
     }
-    // Remove visible class to hide weather__padding
-    const weatherPadding = document.getElementsByClassName('weather__padding')[0].classList;
-    if (weatherPadding.contains('visible-sm-block')) {
-        weatherPadding.remove('visible-sm-block');
-    }
-    if (weatherPadding.contains('visible-md-block')) {
-        weatherPadding.remove('visible-md-block');
-    }
-    if (weatherPadding.contains('visible-lg-block')) {
-        weatherPadding.remove('visible-lg-block');
-    }
 
     // Add hidden class to hide padding weather__forecast-title div
     const forecastTitle = document.getElementsByClassName('weather__forecast-title')[0];
