@@ -4,6 +4,8 @@ $tablet-heading-size: 4rem;
 $desktop-heading-size: 5rem;
 $input-border-color: rgb(46, 149, 232);
 $panel-color-primary: rgb(104, 182, 224);
+$search-button-color: #222;
+$white: #fff;
 
 // Descriptive Variables
 $black: #000;
@@ -15,6 +17,15 @@ $black: #000;
 @mixin block-margin {
   margin-left: auto;
   margin-right: auto;
+}
+
+.navbar {
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.weather-wrapper {
+  background-color: $panel-color-primary;
 }
 
 .weather {
@@ -56,6 +67,17 @@ $black: #000;
 
   &__input {
     border: 1px solid $input-border-color;
+  }
+
+  &__button {
+    background: $search-button-color !important;
+    color: $white;
+
+    &:hover,
+    &:active {
+      background: lighten($search-button-color, 12.5) !important;
+      color: $white;
+    }
   }
 }
 

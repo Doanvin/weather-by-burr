@@ -7,20 +7,20 @@
     })
 );
 
-function httpGetAsync(theUrl, callback) {
+function getJson(url, callback) {
+    // Makes requests to an api that returns json
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200)
             callback(xhr.responseText);
     };
-    xhr.open('GET', theUrl, true); // true for asynchronous
+    xhr.open('GET', url, true); // true for asynchronous
     xhr.send(null);
 }
 
-function createWeatherGetUrl() {
-    let queryText = document.getElementsByClassName('search__input')[0].value;
+function setWeatherUrl(queryText) {
     // queryText is value of search input box; Reno, Nv if undefined
-    if (queryText==undefined || queryText==''){queryText = 'Reno, Nv';}
+    if (queryText===undefined || queryText==''){queryText = 'Reno, Nv';}
     queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
     // Format url
     const startUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20location%2C%20item%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22';
@@ -31,10 +31,10 @@ function createWeatherGetUrl() {
 }
 
 /* exported getWeatherItem */
-function getWeatherItem() {
-    const url = createWeatherGetUrl();
+function getWeatherItem(search_query) {
+    const url = setWeatherUrl(search_query);
     // Makes async GET request using parseWeatherItem() as a callback.
-    httpGetAsync(url, parseWeatherItem);
+    getJson(url, parseWeatherItem);
 }
 
 /* exported parseWeatherItem */
@@ -48,11 +48,11 @@ function parseWeatherItem (o) {
     const country = results.location.country;
     const current = results.item.condition;
     const forecasts = results.item.forecast;
-    createWeatherCurrent(city, state, country, current);
-    createWeatherForecast(forecasts);
+    setWeatherCurrent(city, state, country, current);
+    setWeatherForecast(forecasts);
 }
 
-function createWeatherCurrent (city, state, country, currentConditions) {
+function setWeatherCurrent (city, state, country, currentConditions) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weatherCurrent div. All variables passed in should be strings.
     let location = document.getElementsByClassName('weather__location')[0];
@@ -62,7 +62,7 @@ function createWeatherCurrent (city, state, country, currentConditions) {
     condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And Fucking ' + currentConditions.text;
 }
 
-function createWeatherForecast (forecasts) {
+function setWeatherForecast (forecasts) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weather__forecast div. forecasts is an array of objects.
     const numForecasts = forecasts.length;
@@ -163,4 +163,33 @@ function setImgSrc(code) {
         ];
     return yahooWeather[code];
 
+}
+
+function getZipCode(json) {
+  // Parses response from requesr and returns zip code
+    const o = JSON.parse(json);
+    getWeatherItem(o.zip_code);
+}
+
+/* exported getWeatherByIp */
+function getWeatherByIp() {
+    const url = 'https://freegeoip.net/json/';
+    // Makes async GET request using getCityState() as a callback.
+    getJson(url, getZipCode);
+}
+
+function setIframeSrc() {
+    const iframeSrcs = ['https://www.youtube.com/embed/S9ZSzuj1UpA',
+        'https://www.youtube.com/embed/FR7YnNM6IXA?list=RDFR7YnNM6IXA',
+        'https://www.youtube.com/embed/8fo4STfDlZk?list=PLJMuYl1_E0hehY29rF1_p1UAOaxo_1S49',
+        'https://www.youtube.com/embed/x9iYvyffAh4?list=RDGAlU9nVnFx8'];
+    const iframes = document.getElementsByTagName('iframe');
+    for (let i=0; i<iframes.length; i+=1) {
+        iframes[i].src =  iframeSrcs[i];
+    }
+}
+
+function windowLoad(){
+    getWeatherByIp();
+    window.setTimeout(setIframeSrc, 1000);
 }
