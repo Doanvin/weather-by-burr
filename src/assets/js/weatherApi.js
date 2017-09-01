@@ -13,6 +13,7 @@ function getJson(url, callback) {
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200)
             callback(xhr.responseText);
+        else callback({});
     };
     xhr.open('GET', url, true); // true for asynchronous
     xhr.send(null);
@@ -166,9 +167,15 @@ function setImgSrc(code) {
 }
 
 function getZipCode(json) {
-  // Parses response from requesr and returns zip code
-    const o = JSON.parse(json);
-    getWeatherItem(o.zip_code);
+  // Parses response from request and returns zip code
+
+    try {
+        const o = JSON.parse(json);
+        getWeatherItem(o.zip_code);
+    }
+    catch (e) {
+        getWeatherItem('89503');
+    }
 }
 
 /* exported getWeatherByIp */
@@ -188,7 +195,7 @@ function setIframeSrc() {
         iframes[i].src =  iframeSrcs[i];
     }
 }
-
+/* exported windowLoad */
 function windowLoad(){
     getWeatherByIp();
     window.setTimeout(setIframeSrc, 1000);
