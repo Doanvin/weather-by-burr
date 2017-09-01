@@ -16,7 +16,7 @@ var sourcemaps    = require('gulp-sourcemaps');
 var babel         = require('gulp-babel');
 
 // JS Task
-gulp.task('js-compile', function () {
+gulp.task('js-concat', function () {
   return gulp.src('src/assets/js/**/*.js')
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -26,7 +26,7 @@ gulp.task('js-compile', function () {
     .pipe(gulp.dest('build/assets/js'))
 });
 
-gulp.task('js-minify', ['js-compile'], function () {
+gulp.task('js-minify', ['js-concat'], function () {
   return gulp.src('build/assets/js/bundle.js')
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -37,7 +37,7 @@ gulp.task('js-minify', ['js-compile'], function () {
     .pipe(reload({stream:true}));
 });
 
-gulp.task('js', ['js-compile', 'js-minify']);
+gulp.task('js', ['js-concat', 'js-minify']);
 
 
 // gulp.task('js', function(){
