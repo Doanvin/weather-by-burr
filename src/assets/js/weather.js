@@ -110,7 +110,9 @@ function setWeatherForecast (forecasts) {
 function setImgSrc(code) {
     // Takes interger code from yahoo weather (0-47) and returns text to be used
     // for img src.  https://developer.yahoo.com/weather/documentation.html#codes
-    const weatherCodes = ['Sunny', 'Cloudy', 'MostlyCloudy', 'CloudyNight', 'Thunderstorms', 'ThunderstormsNight', 'Drizzle', 'DrizzleNight', 'SlightDrizzle', 'Haze', 'Moon', 'Snow'];
+    const weatherCodes = ['Sunny', 'Cloudy', 'MostlyCloudy', 'CloudyNight',
+        'Thunderstorms', 'ThunderstormsNight', 'Drizzle', 'DrizzleNight',
+        'SlightDrizzle', 'Haze', 'Moon', 'Snow'];
     const yahooWeather =
         [
             weatherCodes[5],// 0
@@ -186,6 +188,7 @@ function getWeatherByIp() {
 }
 
 function setIframeSrc() {
+    // Sets the src attribute of YouTube iframes after the page has loaded
     const iframeSrcs = ['https://www.youtube.com/embed/S9ZSzuj1UpA',
         'https://www.youtube.com/embed/FR7YnNM6IXA?list=RDFR7YnNM6IXA',
         'https://www.youtube.com/embed/8fo4STfDlZk?list=PLJMuYl1_E0hehY29rF1_p1UAOaxo_1S49',
