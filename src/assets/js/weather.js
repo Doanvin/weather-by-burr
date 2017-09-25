@@ -54,14 +54,17 @@ function parseWeatherItem (o) {
     setWeatherForecast(forecasts);
 }
 
-function setWeatherCurrent (city, state, country, currentConditions) {
+function setWeatherCurrent (city, state, country, current) {
     // Takes parsed weather info and creates a div to be placed in the
     // .weatherCurrent div. All variables passed in should be strings.
     let location = document.getElementsByClassName('weather__location')[0];
     location.innerHTML = city + ', ' + state;
 
+    let imgSrc = setImgSrc(current.code);
+
     let condition = document.getElementsByClassName('weather__condition')[0];
-    condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And ' + currentConditions.text;
+    condition.innerHTML = '<img height="150px" width="150px" src="assets/img/weather/'
+    + imgSrc + '.png" /><br/>' + 'It\'s ' + current.temp + ' &#8457 And ' + current.text;
 }
 
 function setWeatherForecast (forecasts) {
