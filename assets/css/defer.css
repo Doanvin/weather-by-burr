@@ -1,0 +1,64 @@
+.navbar {
+  border-radius: 0 !important;
+  margin-bottom: 0 !important; }
+
+.weather-wrapper {
+  background-color: #68b6e0; }
+
+.weather__current {
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 2px solid #000; }
+
+.weather__condition {
+  font-size: 3rem; }
+
+.weather__query {
+  margin: 15px; }
+
+.weather__forecast {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3.5rem;
+  padding-top: 3.5rem; }
+
+.search {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  width: 100%; }
+  .search--center {
+    margin-left: auto;
+    margin-right: auto;
+    float: none; }
+  .search__input {
+    border: 1px solid #2e95e8; }
+  .search__button {
+    background: #222 !important;
+    color: #fff; }
+    .search__button:hover, .search__button:active {
+      background: #424242 !important;
+      color: #fff; }
+
+@media (max-width: 767px) {
+  .search__button {
+    float: none;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 16px;
+    width: 50%; } }
+
+@media (min-width: 768px) {
+  .search {
+    padding-bottom: 70px; } }
+
+.yt {
+  padding-top: 7rem; }
+  .yt__padding {
+    padding-top: 3.5rem; }
+
+.yt2 {
+  padding-bottom: 2rem;
+  padding-top: 3.5rem; }
+
+.section-title {
+  padding-bottom: 3.5rem; }
