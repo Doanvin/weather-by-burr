@@ -11,4 +11,4 @@ Web application for weather with witty comments by comedian Bill Burr.
 - Bootstrap for responsiveness
 - Gulp and BrowserSync for work flow automation
 - Yahoo Weather API for weather data
-- YouTube API for videos (coming soon)
+- YouTube API for videos
