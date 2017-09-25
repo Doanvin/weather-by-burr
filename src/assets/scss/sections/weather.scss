@@ -29,12 +29,9 @@ $black: #000;
 }
 
 .weather {
-
   &__current {
-    @include border;
     @include block-margin;
-    background: $panel-color-primary;
-    // padding-bottom: 10px;
+    border-bottom: 2px solid $black;
   }
 
   &__condition {
@@ -42,12 +39,10 @@ $black: #000;
   }
 
   &__query {
-    @include border;
     margin: 15px;
   }
 
   &__forecast {
-    @include border;
     @include block-margin;
     padding-bottom: 3.5rem;
     padding-top: 3.5rem;
@@ -60,7 +55,6 @@ $black: #000;
   width: 100%;
 
   &--center {
-    @include border;
     @include block-margin;
     float: none;
   }

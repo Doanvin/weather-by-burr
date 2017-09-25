@@ -1,3 +1,4 @@
+// Creates event listener on search input. Pressing enter clicks search.
 (document.getElementsByClassName('search__input')[0]
     .addEventListener('keyup', (event) => {
         event.preventDefault();
@@ -60,7 +61,7 @@ function setWeatherCurrent (city, state, country, currentConditions) {
     location.innerHTML = city + ', ' + state;
 
     let condition = document.getElementsByClassName('weather__condition')[0];
-    condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And Fucking ' + currentConditions.text;
+    condition.innerHTML = 'It\'s ' + currentConditions.temp + ' &#8457 And ' + currentConditions.text;
 }
 
 function setWeatherForecast (forecasts) {
@@ -91,8 +92,9 @@ function setWeatherForecast (forecasts) {
             forecastClass = 'col-sm-offset-3 col-md-offset-0 col-lg-offset-0 ';
         }
         forecastHtml += '<div class="weather__forecast-item ' + forecastClass +
-        'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day + '</h3></div><div class="col-xs-6"><p>'
-        + high + ' &#8457</p><p>' + low + ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/'
+        'col-xs-6 col-sm-3 col-md-2"><div class="col-xs-12"><h3>' + day +
+        '</h3></div><div class="col-xs-6"><p>' + high + ' &#8457</p><p>' + low +
+        ' &#8457</p></div><div class="col-xs-6"><img class="img-responsive" src="assets/img/weather/'
         + imgSrc + '.png" /></div><div class="col-xs-12"><p>' + text + '</p></div></div>' + forecastClearfix;
     }
 
@@ -169,7 +171,7 @@ function setImgSrc(code) {
 }
 
 function getZipCode(json) {
-  // Parses response from request and returns zip code
+    // Parses response from request and returns zip code
 
     try {
         const o = JSON.parse(json);
