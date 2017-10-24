@@ -1,20 +1,12 @@
-// Creates event listener on search input. Pressing enter clicks search.
-(document.getElementsByClassName('search__input')[0]
-    .addEventListener('keyup', (event) => {
-        event.preventDefault();
-        if (event.keyCode == 13) {
-            document.getElementsByClassName('search__button')[0].click();
-        }
-    })
-);
+
 
 function getJson(url, callback) {
     // Makes requests to an api that returns json
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
-        if (xhr.readyState == 4 && xhr.status == 200)
-            callback(xhr.responseText);
-        else callback({});
+        (xhr.readyState == 4 && xhr.status == 200)
+            ? callback(xhr.responseText)
+            : callback({});
     };
     xhr.open('GET', url, true); // true for asynchronous
     xhr.send(null);
@@ -22,8 +14,10 @@ function getJson(url, callback) {
 
 function setWeatherUrl(queryText) {
     // queryText is value of search input box; Reno, Nv if undefined
-    if (queryText===undefined || queryText==''){queryText = 'Reno, Nv';}
-    queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
+    (queryText===undefined || queryText=='')
+        ? queryText = 'Reno, Nv'
+        : queryText = queryText.replace(/,/, '%2C').replace(/ /, '%20');
+
     // Format url
     const startUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20location%2C%20item%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22';
     const endUrl = '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
@@ -199,6 +193,7 @@ function setIframeSrc() {
         'https://www.youtube.com/embed/8fo4STfDlZk?list=PLJMuYl1_E0hehY29rF1_p1UAOaxo_1S49',
         'https://www.youtube.com/embed/x9iYvyffAh4?list=RDGAlU9nVnFx8'];
     const iframes = document.getElementsByTagName('iframe');
+
     for (let i=0; i<iframes.length; i+=1) {
         iframes[i].src =  iframeSrcs[i];
     }
@@ -206,5 +201,15 @@ function setIframeSrc() {
 /* exported windowLoad */
 function windowLoad(){
     getWeatherByIp();
+
+    // Creates event listener on search input. Pressing enter clicks search.
+    document.getElementsByClassName('search__input')[0]
+        .addEventListener('keyup', (event) => {
+            event.preventDefault();
+            if (event.keyCode == 13) {
+                document.getElementsByClassName('search__button')[0].click();
+            }
+        });
+
     window.setTimeout(setIframeSrc, 1000);
 }
