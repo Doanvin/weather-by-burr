@@ -26,7 +26,6 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Weather</a></li>
-            <li><a href="#videos">Videos</a></li>
           </ul>
         </div>
       </div>
@@ -39,9 +38,9 @@
       <!-- row class not needed because of the form-control class -->
       <div class="search search--center">
         <div class="col-sm-8 col-sm-offset-1 col-md-6 col-md-offset-2">
-          <input type="text" class="input-lg form-control search__input" name="weatherQuery" value="" placeholder="Where Are Yuh?">
+          <input type="text" class="input-lg form-control search__input" onkeyup="checkIfEnter(ev);" name="weatherQuery" value="" placeholder="Where Are You?" autofocus>
         </div>
-        <button type="button" class="col-sm-2 search__button btn btn-lg" onclick="getWeatherItem(document.getElementsByClassName('search__input')[0].value);">Search</button>
+        <button id="search-button" type="button" class="col-sm-2 search__button btn btn-lg" onclick="getWeatherItem(document.getElementsByClassName('search__input')[0].value);">Search</button>
       </div>
 
       <!-- Div tag for displaying current weather conditions after a query -->
@@ -63,53 +62,6 @@
   </section>
 
 
-
-  <section id="videos" class="container yt">
-    <div class="row">
-      <h2 class="section-title text-center">Best Burr Vids</h2>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" type="text/html"
-          src=""
-          frameborder="0"></iframe>
-        </div>
-      </div>
-      <div class="yt__padding visible-xs-block"></div>
-      <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" type="text/html"
-          src=""
-          frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container yt2">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" type="text/html"
-          src=""
-          frameborder="0"></iframe>
-        </div>
-      </div>
-      <div class="yt__padding visible-xs-block"></div>
-      <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" type="text/html"
-          src=""
-          frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
   <hr class="featurette-divider">
 
   <!-- /END THE FEATURETTES -->
@@ -118,7 +70,7 @@
   <!-- FOOTER -->
   <footer class="container">
     <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>&copy; Copyright 2017</p>
+    <p>&copy; Copyright 2017 - 2018</p>
   </footer>
 
 
@@ -129,6 +81,13 @@
 
   <script type="text/javascript">
     window.addEventListener('load', windowLoad);
+
+    function checkIfEnter() {
+      ev.preventDefault();
+      if (ev.keyCode === 13) {
+          document.getElementById("search-button").click();
+      }
+    }
   </script>
 </body>
 </html>
